@@ -7,9 +7,10 @@ import cors from "cors";
 import questionRoutes from "./routes/questionRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
-import jobRoutes from "./routes/jobRoutes.js"; // ✅ This is the missing import
+import jobRoutes from "./routes/jobRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
+
 dotenv.config();
 connectDB();
 
@@ -22,8 +23,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api", jobRoutes);
 app.use("/api", resumeRoutes);
-
 app.use("/api/subscription", subscriptionRoutes);
+
+// ✅ ADD THIS:
+app.get("/", (req, res) => {
+  res.send("✅ Corporate MERN backend is running.");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
