@@ -15,7 +15,14 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://corporate-mern-stack-website-frontend.onrender.com",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/questions", questionRoutes);
@@ -25,7 +32,6 @@ app.use("/api", jobRoutes);
 app.use("/api", resumeRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 
-// ✅ ADD THIS:
 app.get("/", (req, res) => {
   res.send("✅ Corporate MERN backend is running.");
 });
